@@ -7,6 +7,7 @@ use std::error::Error;
 use std::ops::Index;
 use std::time::Instant;
 use time::Duration;
+use rusb2snes::SyncClient;
 
 lazy_static! {
     static ref roomIDEnum: HashMap<&'static str, u32> = {
@@ -2228,11 +2229,11 @@ impl SNESState {
 
     pub fn fetch_all(
         &mut self,
-        client: &mut crate::usb2snes::SyncClient,
+        client: &mut SyncClient,
         settings: &Settings,
     ) -> Result<SNESSummary, Box<dyn Error>> {
         let start_time = Instant::now();
-        let snes_data = client.get_addresses(&[
+        let snes_data = client.get_multi_address_as_vec_u8(&[
             (0xF5008B, 2),  // Controller 1 Input
             (0xF5079B, 3),  // ROOM ID + ROOM # for region + Region Number
             (0xF50998, 1),  // GAME STATE

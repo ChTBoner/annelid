@@ -3,7 +3,7 @@
 extern crate lazy_static;
 pub mod autosplitters;
 pub mod routes;
-pub mod usb2snes;
+use rusb2snes::SyncClient;
 
 use autosplitters::supermetroid::{SNESState, Settings};
 use clap::Parser;
@@ -65,7 +65,7 @@ struct AppConfig {
     frame_rate: Option<f32>,
     #[clap(name = "reset-timer-on-game-reset", long, short = 'r', value_parser)]
     reset_timer_on_game_reset: Option<YesOrNo>,
-    #[clap(name = "reset-game-on-timer-reset", long, short = 's', value_parser)]
+    #[clap(name = "reset-game-on-timer-reset", long, short = 't', value_parser)]
     reset_game_on_timer_reset: Option<YesOrNo>,
     #[clap(name = "global-hotkeys", long, short = 'g', value_parser)]
     global_hotkeys: Option<YesOrNo>,
@@ -1529,7 +1529,7 @@ fn main() -> std::result::Result<(), Box<dyn Error>> {
                     // polling of SNES state
                     .spawn(move |_| loop {
                         print_on_error(|| -> std::result::Result<(), Box<dyn Error>> {
-                            let mut client = usb2snes::SyncClient::connect()?;
+                            let mut client = SyncClient::connect()?;
                             client.set_name("annelid".to_owned())?;
                             println!("Server version is {:?}", client.app_version()?);
                             let mut devices = client.list_device()?;

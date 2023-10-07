@@ -178,15 +178,16 @@ dependencies = [
  "parking_lot",
  "rfd",
  "roxmltree",
+ "rusb2snes",
  "serde",
  "serde_derive",
  "serde_json",
  "strum",
- "strum_macros",
+ "strum_macros 0.24.3",
  "thread-priority",
  "time",
  "toml",
- "tungstenite",
+ "tungstenite 0.19.0",
 ]
 
 [[package]]
@@ -2387,6 +2388,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "rusb2snes"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7b42ba5df28a73ffef9cf63ed688d3f1647a275518473cc981fa4df0ca0b5de2"
+dependencies = [
+ "serde",
+ "serde_json",
+ "strum_macros 0.25.2",
+ "tungstenite 0.20.1",
+]
+
+[[package]]
 name = "rustix"
 version = "0.37.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2694,6 +2707,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "strum_macros"
+version = "0.25.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ad8d03b598d3d0fff69bf533ee3ef19b8eeb342729596df84bcc7e1f96ec4059"
+dependencies = [
+ "heck",
+ "proc-macro2",
+ "quote",
+ "rustversion",
+ "syn 2.0.18",
+]
+
+[[package]]
 name = "syn"
 version = "1.0.109"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2992,6 +3018,25 @@ name = "tungstenite"
 version = "0.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "15fba1a6d6bb030745759a9a2a588bfe8490fc8b4751a277db3a0be1c9ebbf67"
+dependencies = [
+ "byteorder",
+ "bytes",
+ "data-encoding",
+ "http",
+ "httparse",
+ "log",
+ "rand",
+ "sha1",
+ "thiserror",
+ "url",
+ "utf-8",
+]
+
+[[package]]
+name = "tungstenite"
+version = "0.20.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9e3dac10fd62eaf6617d3a904ae222845979aec67c615d1c842b4002c7666fb9"
 dependencies = [
  "byteorder",
  "bytes",
